@@ -1,0 +1,24 @@
+{% block card %}
+    {% block body %}{% endblock %}
+    {% block form_start %}
+        {{ form_start(form) }}
+    {% endblock %}
+    {% block form_widget %}
+        {% for form_child in form %}
+            {% set block_form_row = 'form_row_'~form_child.vars.name %}
+            {% if block(block_form_row) is defined %}
+                {{ block(block_form_row) }}
+            {% endif %}
+            {{ form_row(form_child) }}
+        {% endfor %}
+    {% endblock %}
+    {% block form_buttons %}
+        <v-btn primary type="submit" rounded large color="{{ btn_type|default('primary') }}">
+            <v-icon>mdi-content-save</v-icon>
+            {{ btn_text|default('Save') }}
+        </v-btn>
+    {% endblock %}
+    {% block form_end %}
+        {{ form_end(form) }}
+    {% endblock %}
+{% endblock %}

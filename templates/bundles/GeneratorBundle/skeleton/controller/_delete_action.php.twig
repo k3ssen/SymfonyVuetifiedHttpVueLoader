@@ -1,0 +1,8 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{% use '@!Generator/skeleton/controller/_delete_action.php.twig' %}
+{% block delete_action_return_response %}
+        return $this->render('{{ view_prefix }}/delete.vue.twig', [
+            '{{ meta_entity.name | tableize }}' => ${{ entity_variable }},
+            'form' => $form->createView(),
+        ]);
+{% endblock %}

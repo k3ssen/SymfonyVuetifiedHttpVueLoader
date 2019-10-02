@@ -1,0 +1,46 @@
+generator:
+    ask_bundle: false                 #use true if you're using multiple bundles.
+    ask_display_field: true           #use false if you don't want to be bothered what field to use for __toString in entities.
+    ask_entity_subdirectory: true     #use false if you're not planning on using subdirectories for entities.
+    ask_traits: true                  #use false if you don't want trait-questions.
+    ask_validations: true             #use false if you don't want validation-questions during entity-generation
+    trait_options:
+        Blameable:
+            ask: true                 #use false to not ask for Blameable
+            default: true             #default choice-value (also used when aks is set to false)
+            namespace: 'App\Entity\Traits\BlameableTrait'
+            interface_namespace: 'App\Entity\Interfaces\BlameableInterface'
+        SoftDeleteable:
+            ask: true
+            default: true
+            namespace: 'App\Entity\Traits\SoftDeleteableTrait'
+            interface_namespace: 'App\Entity\Interfaces\SoftDeleteableInterface'
+        Timestampable:
+            ask: true
+            default: true
+            namespace: 'App\Entity\Traits\TimestampableTrait'
+            interface_namespace: 'App\Entity\Interfaces\TimestampableInterface'
+        # You can add more traits if you want.
+
+    # Overwriting attribute-settings are part of a special usecase.
+    # You can quite easily choose defaults, but should only be used if you have a good understanding of how these settings work.
+    # Please checkout the 'resources/config/services.yaml' of this bundle for more info about attribute-settings.
+    attributes:
+        id:
+            question: null                 #null means length will never be asked (during entity-generation) if a property is the identifier entity-generation. (remove this line if you want this question)
+        length:
+            question: null                 #null means length will never be asked for properties during entity-generation. (remove this line if you want this question)
+        precision:
+            question: null                 #null means length will never be asked for (decimal)properties during entity-generation. (remove this line if you want this question)
+        nullable:
+            default: false
+        # You can add custom attributes
+
+    use_voter_default: true                 #Default answer for using Voter during crud-generation
+    ask_use_voter: true                     #use false to never be asked about using Voters during crud-generation (use_voter_default will always be used)
+    use_datatable_default: true             #Default answer for using Datatables during crud-generation
+    ask_use_datatable: true                 #use false to never be asked about using Datatables (use_datatable_default will always be used)
+    use_write_actions_default: true         #Default answer for using write actions (new, edit, delete) during crud-generation.
+    ask_use_write_actions: true             #use false to never be asked about using write actions (use_write_actions_default will always be used)
+    controller_subdirectory_default: null   #what subdirectory controllers should use by default? (null means no subdirectory)
+    ask_controller_subdirectory: true       #use false to never be asked what subdirectory a controller should use (controller_subdirectory_default will always be used)

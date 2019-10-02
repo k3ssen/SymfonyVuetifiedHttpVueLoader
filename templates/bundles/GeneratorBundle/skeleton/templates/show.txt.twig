@@ -1,0 +1,44 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions#}
+{% set entity_singularized = meta_entity.name|tableize %}
+<template>
+    {{ "{% embed 'components/card.html.twig' with {title: '"~meta_entity.name|humanize~"', entity: "~entity_singularized~"} %}" }}
+    {%- for property in meta_entity.properties %}
+
+        <static-field label="{{ property.name|humanize }}">
+        {#- @var property \K3ssen\GeneratorBundle\MetaData\Property\MetaPropertyInterface #}
+        {%- set getter = entity_singularized ~ '.' ~ property.name %}
+        {%- if property.ormType in 'OneToManyToMany' %}
+
+            <ul>
+                {{ '{% for ' ~ property.name|singularize|tableize ~ ' in ' ~ getter ~ ' %}' }}
+                <li>{{ '{{ ' ~ property.name|singularize|tableize ~ ' }}' }}</li>
+                {{ '{% endfor %}' }}
+            </ul>
+        {%- elseif property.ormType in ['text'] %}
+
+            {{ '{{ '~ getter ~'|nl2br }}' }}
+        {%- else %}
+            {%- set filter = null %}
+            {%- if property.ormType in ['datetime', 'datetime_immutable'] -%}
+                {% set filter = "|date('Y-m-d H:i:s')" -%}
+            {%- elseif property.ormType in ['date', 'date_immutable'] -%}
+                {% set filter = "|date('Y-m-d')" -%}
+            {%- elseif property.ormType in ['time', 'time_immutable'] -%}
+                {% set filter = "|date('H:i:s')" -%}
+            {%- elseif property.ormType in ['array'] -%}
+                {% set filter = "|join(, )" -%}
+            {%- elseif property.ormType in ['boolean'] -%}
+                {% set getter = getter ~ " ? 'Yes' : 'No'" -%}
+            {%- elseif property.ormType in ['text'] -%}
+                {% set filter = "|nl2br" %}
+            {%- endif %}
+
+            {{ "{{ "~getter ~filter|default('')~ " }}" -}}
+        {%- endif %}
+
+        </static-field>
+    {%- endfor %}
+
+    {{ "{% endembed %}" }}
+</template>

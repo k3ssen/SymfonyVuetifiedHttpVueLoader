@@ -1,0 +1,17 @@
+{% extends 'components/card.html.twig' %}
+
+{% block body %}
+    <p>Are you sure you want to delete this entry?</p>
+
+    {% if form is defined %}
+        {% embed 'components/form.html.twig' %}
+            {% block form_buttons %}
+                <btn-delete type="submit">{{ btn_text|default('Yes, delete') }}</btn-delete>
+                <v-btn rounded onclick="window.history.back();">
+                    <v-icon>mdi-close-circle-outline</v-icon>
+                    {{ btn_text|default('No, go back') }}
+                </v-btn>
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

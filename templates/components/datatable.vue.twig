@@ -1,0 +1,102 @@
+{# @var datatable \App\Datatable\DatatableInterface #}
+<template>
+    {% include 'components/flash_messages.html.twig' %}
+    {% embed 'components/card.html.twig' %}
+        {% block title %}
+            {{ title|default('datatable') }}
+            <div class="flex-grow-1"></div>
+            <v-text-field
+                    v-model.lazy="options.search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+            />
+        {% endblock %}
+
+        <v-data-table
+                :headers="headers"
+                :items="items"
+                :items-per-page="itemsPerPage"
+                {% if datatable.useAjax %}
+                    :options.sync="options"
+                    :loading="loading"
+                    :server-items-length="total"
+                {% else %}
+                    :search="options.search"
+                {% endif %}
+                :footer-props="{'items-per-page-options': [10, 25, 50, 100, 500]}"
+        >
+            <template v-slot:item.actions="{ item }">
+                <v-btn v-for="(action, key) in item.actions" :key="key"
+                       :href="action.href"
+                       small
+                       fab
+                       depressed
+                       :color="action.color"
+                       class="ml-1"
+                >
+                    <v-icon>{{ '{{ action.icon }}' }}</v-icon>
+                </v-btn>
+            </template>
+        </v-data-table>
+    {% endembed %}
+</template>
+
+<script>
+    module.exports = {
+        data: () => ({
+            {% block data %}
+                headers: {{ datatable.headers|json_encode|raw }},
+                items: {{ datatable.items|json_encode|raw }},
+                total: {{ datatable.total }},
+                ajaxUrl: '{{ datatable.ajaxUrl }}',
+                itemsPerPage: {{ datatable.datatableOptions.itemsPerPage }},
+                loading: false,
+                options: {
+                    search: "",
+                },
+            {% endblock %}
+        }),
+        watch: {
+            {% block watch %}
+                {% if datatable.useAjax %}
+                    options: {
+                        handler () {
+                            this.itemsPerPage = this.options.itemsPerPage;
+                            this.getDataFromApi();
+                        },
+                        deep: true,
+                    },
+                {% endif %}
+            {% endblock %}
+        },
+        methods: {
+            {% block methods %}
+                getDataFromApi() {
+                    this.loading = true;
+                    return new Promise((resolve, reject) => {
+                        const vm = this;
+                        fetch(this.ajaxUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.options),
+                        }).then((response) => {
+                            response.json().then((data) => {
+                                vm.items = data.items;
+                                vm.total = data.total;
+                                this.loading = false;
+                            });
+                        });
+                    });
+                },
+            {% endblock %}
+        },
+        computed: {
+            {% block computed %}{% endblock %}
+        },
+    }
+</script>

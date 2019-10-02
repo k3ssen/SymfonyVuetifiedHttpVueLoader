@@ -1,0 +1,24 @@
+{% block card %}
+    <v-card class="mb-3">
+        {% if title|default(false) or block('title')|replace({' ':''}) is not empty  %}
+            <v-card-title>
+                {% block title %}{{ title|default('') }}{% endblock %}
+            </v-card-title>
+        {% endif %}
+        <v-card-text>
+            {% block body %}
+                {% if form is defined %}
+                    {% include 'components/form.html.twig' %}
+                {% endif %}
+            {% endblock %}
+        </v-card-text>
+        {% if block('card_actions')|replace({' ':''}) is not empty %}
+            <v-card-actions>
+                {% block card_actions %}{% endblock %}
+            </v-card-actions>
+        {% endif %}
+    </v-card>
+    {% if action_prefix|default(false) or entity|default(false) %}
+        {% include 'components/actions.html.twig' with {action_prefix: action_prefix|default(null), entity: entity|default(null)} %}
+    {% endif %}
+{% endblock %}

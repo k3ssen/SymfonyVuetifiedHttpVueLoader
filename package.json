@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "encore production --progress",
+    "dev": "encore dev",
+    "dev-server": "encore dev-server",
+    "watch": "encore dev --watch"
+  },
+  "dependencies": {
+    "vuetify": "^2.0.0"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.28.0",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.1.0",
+    "core-js": "^3.0.0",
+    "deepmerge": "^4.0.0",
+    "fibers": "^4.0.1",
+    "regenerator-runtime": "^0.13.2",
+    "sass": "^1.22.12",
+    "sass-loader": "^8.0.0",
+    "vue": "^2.6.10",
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-loader": "15.7.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.2.2",
+    "webpack-notifier": "^1.6.0"
+  },
+  "license": "UNLICENSED"
+}

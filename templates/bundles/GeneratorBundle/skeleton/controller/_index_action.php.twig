@@ -1,0 +1,15 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions #}
+{% use '@!Generator/skeleton/controller/_index_action.php.twig' %}
+{% block index_action_return_response %}
+        return $this->render('{{ view_prefix }}/index.vue.twig', [
+    {%- if generate_options.useDatatable %}
+
+            'datatable' => $datatable,
+    {%- else %}
+
+            '{{ meta_entity.name | pluralize | tableize }}' => $repo->findAll(),
+    {%- endif %}
+
+        ]);
+{% endblock %}

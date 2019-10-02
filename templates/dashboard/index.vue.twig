@@ -1,0 +1,31 @@
+<template>
+    <v-card>
+        <v-card-title>
+            ${ title }
+        </v-card-title>
+        <v-card-text>
+            <p class="test">
+                <span class="blue-color">${ timer }</span> seconds have past since this page was loaded.
+            </p>
+        </v-card-text>
+    </v-card>
+</template>
+
+<script>
+    module.exports = {
+        delimiters: ['${', '}'],
+        data: () => ({
+            title: 'Welcome',
+            timer: 0,
+        }),
+        mounted() {
+            setInterval(() => { this.timer++; }, 1000);
+        },
+    }
+</script>
+
+<style>
+    .blue-color {
+        color: blue;
+    }
+</style>

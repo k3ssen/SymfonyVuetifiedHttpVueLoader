@@ -1,0 +1,12 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        # for options, see: https://vuetifyjs.com/en/components/text-fields#usage
+        # if solo is used, then labels will be rendered in twig
+        input_style: 'solo'
+        # set true if pages should be fetched through ajax; set false if pages should refresh the entire page.
+        load_pages_by_ajax: true
+    form_themes:
+        - 'form/vue-layout.html.twig'

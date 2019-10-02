@@ -1,0 +1,9 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions #}
+{% use '@!Generator/skeleton/controller/_usages.php.twig' %}
+{% block usages %}
+{{ parent() }}
+{%- if generate_options.useDatatable -%}
+use Symfony\Component\HttpFoundation\JsonResponse;
+{% endif %}
+{% endblock %}

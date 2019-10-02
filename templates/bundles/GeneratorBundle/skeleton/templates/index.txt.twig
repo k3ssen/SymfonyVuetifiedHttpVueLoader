@@ -1,0 +1,7 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions#}
+{% set entity_singularized = meta_entity.name|tableize %}
+{{ '{# @var datatable \App\Datatable\DatatableInterface #}' }}
+{{ "{% extends 'components/datatable.vue.twig' %}" }}
+{{ "{% set title = '"~meta_entity.name|humanize~"' %}" }}
+{{ "{% set action_prefix = '"~entity_singularized~"' %}" }}

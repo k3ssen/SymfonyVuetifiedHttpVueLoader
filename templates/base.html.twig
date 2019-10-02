@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="app">
+            <App :ajax-load-pages="{{ load_pages_by_ajax }}">
+                {% block body %}{% endblock %}
+            </App>
+        </div>
+        {% block javascripts %}
+            <script>
+                const pageView = {{ pageView | raw }};
+            </script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

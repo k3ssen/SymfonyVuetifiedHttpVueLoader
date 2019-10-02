@@ -1,0 +1,25 @@
+{% set current_route = app.request.attributes.get('_route') %}
+{% set entity = entity|default(null) %}
+{% if action_prefix is not defined or action_prefix == false %}
+    {% set entity_name = class_name(entity)|tableize %}
+    {% set subdir_part = current_route | split(entity_name) %}
+    {% set action_prefix = subdir_part[0] ~ entity_name %}
+{% endif %}
+{% set voter_prefix = action_prefix | upper %}
+{% set vote = vote is defined and vote ? true : false %}
+
+{% if '_index' not in current_route and (vote == false or is_granted(voter_prefix~'_INDEX')) %}
+    <btn-overview href="{{ path(action_prefix~'_index') }}"></btn-overview>
+{% endif %}
+{% if ('_edit' in current_route or '_delete' in current_route) and (vote == false or is_granted(voter_prefix~'_VIEW', entity)) %}
+    <btn-show href="{{ path(action_prefix~'_show', entity) }}"></btn-show>
+{% endif %}
+{% if '_show' in current_route and (vote == false or is_granted(voter_prefix~'_DELETE', entity)) %}
+    <btn-delete href="{{ path(action_prefix~'_delete', entity) }}"></btn-delete>
+{% endif %}
+{% if '_show' in current_route and (vote == false or is_granted(voter_prefix~'_EDIT', entity)) %}
+    <btn-edit href="{{ path(action_prefix~'_edit', entity) }}"></btn-edit>
+{% endif %}
+{% if '_index' in current_route and (vote == false or is_granted(voter_prefix~'_CREATE', entity)) %}
+    <btn-new href="{{ path(action_prefix~'_new') }}"></btn-new>
+{% endif %}

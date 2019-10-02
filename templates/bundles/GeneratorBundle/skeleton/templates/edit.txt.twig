@@ -1,0 +1,6 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions#}
+{% set entity_singularized = meta_entity.name|tableize %}
+<template>
+    {{ "{% include 'components/card.html.twig' with {title: '"~meta_entity.name|humanize~"', entity: "~entity_singularized~"} %}" }}
+</template>

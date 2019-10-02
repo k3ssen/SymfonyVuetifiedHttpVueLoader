@@ -1,0 +1,8 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{% use '@!Generator/skeleton/controller/_edit_action.php.twig' %}
+{% block edit_action_return_response %}
+        return $this->render('{{ view_prefix }}/edit.vue.twig', [
+            '{{ meta_entity.name | tableize }}' => ${{ entity_variable }},
+            'form' => $form->createView(),
+        ]);
+{% endblock %}

@@ -1,0 +1,38 @@
+{# @var meta_entity \K3ssen\GeneratorBundle\MetaData\MetaEntityInterface #}
+{# @var property \K3ssen\GeneratorBundle\MetaData\Property\MetaPropertyInterface #}
+{# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions #}
+{% block methods %}
+
+    public function buildHeaders(): void
+    {
+        $this
+            {%- if meta_entity.idProperty is null %}
+
+            ->addHeader('id', [
+                'text' => '#',
+            ])
+            {%- endif %}
+            {#- only add properties that are no relationship-type (ormType that contains 'To' are a relationtype, like ManyToOne) #}
+            {%- for property in meta_entity.properties if 'To' not in property.ormType %}
+
+            ->addHeader('{{ property.name }}', [
+                'text' => '{{ property.name|humanize }}',
+            ])
+            {%- endfor %}
+
+        ;
+    }
+
+    public function getEntity(): string
+    {
+        return {{ meta_entity.name }}::class;
+    }
+    {%- if generate_options.controllerSubdirectory  %}
+
+
+    public function getRoute($suffix): string
+    {
+        return '{{ generate_options.controllerSubdirectory|lower }}_'.parent::getRoute($suffix);
+    }
+    {%- endif %}
+{% endblock %}
