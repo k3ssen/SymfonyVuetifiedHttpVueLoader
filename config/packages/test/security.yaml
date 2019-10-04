@@ -1,0 +1,6 @@
+security:
+   encoders:
+       # Lower cost from bcrypt algorithm during test; much faster!
+       FOS\UserBundle\Model\UserInterface:
+           algorithm: bcrypt
+           cost: 4

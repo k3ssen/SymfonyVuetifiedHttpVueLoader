@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% set title = 'Profile' %}
+
+{% block body %}
+    {% block fos_user_content %}
+        {% include "@FOSUser/Profile/show_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}

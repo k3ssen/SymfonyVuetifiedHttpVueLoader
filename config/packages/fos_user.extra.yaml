@@ -1,0 +1,10 @@
+# TODO: Merge this configuration with fos_user.yaml
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    service:
+        mailer: fos_user.mailer.twig_swift # fixes templating service requirement: https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2692#issuecomment-363431743

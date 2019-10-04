@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ title|default('') }}{% endblock %}</title>
+    {% block stylesheets %}
+        {{  block('stylesheets', 'base.html.twig') }}
+        <style>
+            html, body {
+                height: 100%;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+{% include 'layout/breadcrumbs.html.twig' %}
+<div class="d-flex h-100 bg-light">
+    {% include 'layout/flash_messages.html.twig' %}
+    <!-- Page Content -->
+    {% block body %}
+        <div class="m-auto justify-content-center align-self-center">
+        {% block fos_user_content %}{% endblock %}
+        </div>
+    {% endblock %}
+</div>
+{% block javascripts %}
+    {{  block('javascripts', 'base.html.twig') }}
+{% endblock %}
+</body>
+</html>
