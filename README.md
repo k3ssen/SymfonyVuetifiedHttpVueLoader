@@ -1,7 +1,7 @@
 SymfonyVuetified
 =====================
 
-Skeleton for Symfony 4 application that uses utilizes 
+Setup for Symfony 4 application that uses utilizes 
 [Vuetify](https://vuetifyjs.com),
 a modified version of [http-vue-loader](https://github.com/FranckFreiburger/http-vue-loader)
 and the [GeneratorBundle](https://github.com/k3ssen/GeneratorBundle)
@@ -17,10 +17,20 @@ for rapid developing a symfony-vue-apps.
 
 ### Getting started
 
-1. Clone this project
-2. `composer install`
-3. `yarn run build`   
-or run `yarn run watch` during development.
+1. Clone this project.
+1. `composer install`
+1. configure `DATABASE_URL` in your `.env` file.
+1. `php bin/console doctrine:database:create --if-not-exists`
+1. `php bin/console doctrine:schema:update --force`  
+    (or use migrations if you want)
+1. `php bin/console doctrine:fixtures:load -n`    
+1. `yarn install`  
+(use `npm` instead of yarn if you don't have yarn installed)
+1. `yarn run build`  
+(or `yarn run watch` during development).
+
+After this, you should be able to load the website and see a login form. 
+Here, you can log in with `admin` as username and password.
 
 ### Usage
 
@@ -100,4 +110,4 @@ but aren't tested in edge cases yet.
 Date-type is supported, but datetime not yet. 
 * Error-catching needs improvement.
 * Flash-messages don't work through ajax.
-* Base layout needs improvements for dealing with dynamic menu's, login, breadcrumbs, etc...
+* Base layout needs improvements for dealing with dynamic menu's, breadcrumbs, etc...

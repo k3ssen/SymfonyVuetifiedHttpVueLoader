@@ -1,7 +1,0 @@
-# TODO: Merge this configuration with stof_doctrine_extensions.yaml
-stof_doctrine_extensions:
-    orm:
-        default:
-            timestampable: true
-            blameable: true
-            softdeleteable: true
