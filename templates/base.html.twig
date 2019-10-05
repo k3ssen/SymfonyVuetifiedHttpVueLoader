@@ -9,13 +9,30 @@
     </head>
     <body>
         <div id="app">
-            <App :ajax-load-pages="{{ load_pages_by_ajax }}">
+            <App :ajax-load-pages="{{ load_pages_by_ajax ? 'true': 'false' }}">
+                {% include 'components/flash_messages.html.twig' %}
                 {% block body %}{% endblock %}
+                <template slot="menu-items">
+
+                    <menu-item href="{{ path('dashboard') }}"
+                               icon="mdi-view-dashboard"
+                    >
+                        Dashboard
+                    </menu-item>
+                    {% if is_granted('ADMIN_USER_INDEX') %}
+                        <v-subheader>ADMIN</v-subheader>
+                        <menu-item href="{{ path('admin_user_index') }}"
+                                   icon="mdi-account-multiple"
+                        >
+                            Users
+                        </menu-item>
+                    {% endif %}
+                </template>
             </App>
         </div>
         {% block javascripts %}
             <script>
-                const pageView = {{ pageView | raw }};
+                var pageView = {{ pageView | raw }};
             </script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

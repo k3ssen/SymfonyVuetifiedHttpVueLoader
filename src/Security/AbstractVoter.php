@@ -1,11 +1,11 @@
 <?php
-//TODO: THIS FILE IS AUTO-GENERATED - REMOVE THIS COMMENT TO MAKE CLEAR THAT YOU'VE REVIEWED THIS FILE
 declare(strict_types=1);
 
 namespace App\Security;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * AbstractVoter to share some common methods in all your voters.
  *
  * Implementing VoterInterface instead of extending Symfony's Voter class would be a more logical choice.
- * Unfortunatelyphpsy, the Symfony Plugin in PhpStorm requirers the Voters class to be extended, which
+ * Unfortunately, the Symfony Plugin in PhpStorm requirers the Voters class to be extended, which
  * makes this a more practical choice.
  */
 abstract class AbstractVoter extends Voter
@@ -21,7 +21,7 @@ abstract class AbstractVoter extends Voter
     /** @var TokenInterface */
     protected $token;
 
-    /** @var RoleHierarchyInterface */
+    /** @var RoleHierarchyInterface|RoleHierarchy */
     protected $roleHierarchy;
 
     /**
@@ -65,23 +65,23 @@ abstract class AbstractVoter extends Voter
 
     protected function isSuperAdmin(): bool
     {
-        return $this->hasRole('ROLE_SUPER_ADMIN');
+        return $this->hasRole(Roles::ROLE_SUPER_ADMIN);
     }
 
     protected function isAdmin(): bool
     {
-        return $this->hasRole('ROLE_ADMIN');
+        return $this->hasRole(Roles::ROLE_ADMIN);
     }
 
     protected function isUser(): bool
     {
-        return $this->hasRole('ROLE_USER');
+        return $this->hasRole(Roles::ROLE_USER);
     }
 
     protected function hasRole(string $roleName): bool
     {
-        foreach ($this->roleHierarchy->getReachableRoles($this->getToken()->getRoles()) as $role) {
-            if ($roleName === $role->getRole()) {
+        foreach ($this->roleHierarchy->getReachableRoleNames($this->getToken()->getRoleNames()) as $role) {
+            if ($roleName === $role) {
                 return true;
             }
         }

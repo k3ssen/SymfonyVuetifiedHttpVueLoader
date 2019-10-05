@@ -1,6 +1,5 @@
 {# @var datatable \App\Datatable\DatatableInterface #}
 <template>
-    {% include 'components/flash_messages.html.twig' %}
     {% embed 'components/card.html.twig' %}
         {% block title %}
             {{ title|default('datatable') }}

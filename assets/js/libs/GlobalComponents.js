@@ -6,16 +6,17 @@ import BtnEdit from '../components/BtnEdit.vue';
 import BtnOverview from '../components/BtnOverview.vue';
 import BtnShow from '../components/BtnShow.vue';
 import BtnNew from '../components/BtnNew.vue';
+import MenuItem from '../components/MenuItem.vue';
 import {
     VDataTable, VTextField, VBtn, VCombobox, VAutocomplete, VCard, VRadioGroup, VRadio, VCardTitle, VCardText, VIcon,
-    VCardActions, VDatePicker, VMenu, VAlert,
+    VCardActions, VDatePicker, VMenu, VAlert, VCheckbox, VListItem, VListItemAction, VListItemContent, VListItemTitle, VSubheader
 } from 'vuetify/lib';
 
 const importComponts = {
     VDataTable, VTextField, VBtn, VCombobox, VAutocomplete, VCard, VRadioGroup, VRadio, VCardTitle, VCardText,
-    VIcon, VCardActions, VDatePicker, VMenu, VAlert,
+    VIcon, VCardActions, VDatePicker, VMenu, VAlert, VCheckbox, VListItem, VListItemAction, VListItemContent, VListItemTitle, VSubheader,
     // Custom components
-    CollectionType, StaticField, BtnDelete, BtnEdit, BtnOverview, BtnShow, BtnNew
+    CollectionType, StaticField, BtnDelete, BtnEdit, BtnOverview, BtnShow, BtnNew, MenuItem
 };
 
 for (const i in importComponts) {

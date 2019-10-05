@@ -109,5 +109,5 @@ Using vue in twig is merely intended as a bridge between serverside rendered cod
 but aren't tested in edge cases yet. 
 Date-type is supported, but datetime not yet. 
 * Error-catching needs improvement.
-* Flash-messages don't work through ajax.
-* Base layout needs improvements for dealing with dynamic menu's, breadcrumbs, etc...
+* Flash-messages don't work through ajax; an alternative is used in controllers, but a more comprehensive fix 
+would be preferable.

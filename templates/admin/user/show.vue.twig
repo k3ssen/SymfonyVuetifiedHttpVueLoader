@@ -1,0 +1,15 @@
+<template>
+    {% embed 'components/card.html.twig' with {title: 'User', entity: user} %}
+    <static-field label="Username">
+        {{ user.username }}
+    </static-field>
+    <static-field label="Email">
+        {{ user.email }}
+    </static-field>
+    <static-field label="Roles">
+        {% for role in user.roles %}
+            {{ role | trans([], 'roles') }} <br />
+        {% endfor %}
+    </static-field>
+    {% endembed %}
+</template>

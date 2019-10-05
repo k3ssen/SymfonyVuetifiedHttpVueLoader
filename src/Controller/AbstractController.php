@@ -29,6 +29,8 @@ abstract class AbstractController implements ContainerAwareInterface
     /** @var VueDataStorage */
     protected $vueDataStorage;
 
+    protected $flashMessages = [];
+
     /**
      * @required
      */
@@ -43,6 +45,26 @@ abstract class AbstractController implements ContainerAwareInterface
     }
 
     /**
+     * Adds a flash message to the current session for type.
+     *
+     * @throws \LogicException
+     *
+     * @final
+     */
+    protected function addFlash(string $type, string $message)
+    {
+        if (!$this->container->has('session')) {
+            throw new \LogicException('You can not use the addFlash method if sessions are disabled. Enable them in "config/packages/framework.yaml".');
+        }
+        $session = $this->container->get('session');
+        $session->getFlashBag()->add($type, $message);
+        // Flashbag won't work with ajax-request -> use normal session instead
+        // (TODO: merge this with custom flashbag or find way to make flashbag work with ajax)
+        $this->flashMessages[$type][] = $message;
+        $session->set('flashMessages', $this->flashMessages);
+    }
+
+    /**
      * Overwrites 'render' in ControllerTrait, so that Vue page is returned as a single page or withing the base file.
      */
     protected function render(string $view, array $parameters = [], Response $response = null): Response
@@ -54,10 +76,13 @@ abstract class AbstractController implements ContainerAwareInterface
         $vueData = $this->vueDataStorage->getJson();
         $request = $this->container->get('request_stack')->getCurrentRequest();
         if ($request->attributes->get('vue')) {
+            $session = $this->container->get('session');
             $response = JsonResponse::create([
                 'body' => $pageView,
                 'vueData' => $vueData,
+                'flashMessages' => $session->get('flashMessages', []),
             ]);
+            $session->remove('flashMessages');
         } else {
             $response->setContent($this->renderView('base.html.twig', [
                 'pageView' => json_encode([
