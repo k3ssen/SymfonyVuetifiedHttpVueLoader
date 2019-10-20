@@ -64,14 +64,9 @@ abstract class AbstractController implements ContainerAwareInterface
         $session->set('flashMessages', $this->flashMessages);
     }
 
-    /**
-     * Overwrites 'render' in ControllerTrait, so that Vue page is returned as a single page or withing the base file.
-     */
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    protected function renderVue(string $view, array $parameters = []): Response
     {
-        if (null === $response) {
-            $response = new Response();
-        }
+        $response = new Response();
         $pageView = $this->renderView($view, $parameters);
         $vueData = $this->vueDataStorage->getJson();
         $request = $this->container->get('request_stack')->getCurrentRequest();

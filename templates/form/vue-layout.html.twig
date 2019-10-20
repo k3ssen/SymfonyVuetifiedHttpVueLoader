@@ -8,10 +8,10 @@
     <div {% with {attr: row_attr|default({})} %}{{ block('attributes') }}{% endwith %}>
         {% if input_style == 'solo' %}
             <div class="row">
-                <div class="col-sm-2 pt-6">
+                <div class="col-sm-2 py-0 pt-3">
                 {{- form_label(form) -}}
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-10 py-0">
                     {{- form_widget(form, widget_attr) -}}
                 </div>
             </div>
@@ -166,7 +166,7 @@
         <div slot="content" {{ block('widget_container_attributes') }}>
             {% for field in form %}
                 <v-card class="subform my-5 pa-4">
-                    {{ form_row(field, {label: false}) }}
+                    {{ form_widget(field, {label: false}) }}
                     {% if form.vars.allow_delete %}
                         <v-btn onClick="this.closest('.subform').remove()">Remove</v-btn>
                     {% endif %}
@@ -176,7 +176,7 @@
         </v-card>
         {% if prototype is defined and not prototype.rendered %}
             <template slot="prototype">
-                {{ form_row(prototype, {label: false}) }}
+                {{ form_widget(prototype, {label: false}) }}
             </template>
         {% endif %}
     </collection-type>
@@ -199,6 +199,11 @@
         value="{{ value }}"
     ></v-radio>
 {%- endblock radio_widget -%}
+
+
+{%- block checkbox_widget -%}
+    <v-checkbox label="{{ label }}" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}></v-checkbox>
+{%- endblock checkbox_widget -%}
 
 
 {%- block date_widget -%}

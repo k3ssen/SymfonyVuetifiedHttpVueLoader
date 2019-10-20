@@ -46,9 +46,14 @@ class TypeExtension extends AbstractTypeExtension
             }
             $attr['v-model'] = $options['v-model'];
         }
-        $attr['v-model'] = $attr['v-model'] ?? 'form'.$view->vars['unique_block_prefix'];
+        $attr['v-model'] = $attr['v-model'] ?? 'form_'.$view->vars['id'];
 
-        $this->vueDataStorage->addData($attr['v-model'], $view->vars['value']);
+        $value = $view->vars['value'];
+        if (array_key_exists('checked', $view->vars)) {
+            $value = $view->vars['checked'] ? "1" : "0";
+        }
+
+        $this->vueDataStorage->addData($attr['v-model'], $value);
         $view->vars['attr'] = $attr;
     }
 }

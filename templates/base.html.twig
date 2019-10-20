@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <App :ajax-load-pages="{{ load_pages_by_ajax ? 'true': 'false' }}">
+            <App>
                 {% include 'components/flash_messages.html.twig' %}
                 {% block body %}{% endblock %}
                 <template slot="menu-items">
@@ -32,7 +32,8 @@
         </div>
         {% block javascripts %}
             <script>
-                var pageView = {{ pageView | raw }};
+                var loadPagesByAjax = {{ load_pages_by_ajax ? 'true' : 'false' }};
+                var pageView = {{ pageView|default('') | raw }};
             </script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

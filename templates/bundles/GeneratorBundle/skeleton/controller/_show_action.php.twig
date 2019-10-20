@@ -2,7 +2,7 @@
 {# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions #}
 {% use '@!Generator/skeleton/controller/_show_action.php.twig' %}
 {% block show_actions_return_response %}
-        return $this->render('{{ view_prefix }}/show.vue.twig', [
+        return $this->renderVue('{{ view_prefix }}/show.vue.twig', [
             '{{ meta_entity.name | tableize }}' => ${{ entity_variable }},
         ]);
 {% endblock %}

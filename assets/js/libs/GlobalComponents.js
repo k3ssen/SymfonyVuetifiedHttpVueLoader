@@ -9,12 +9,14 @@ import BtnNew from '../components/BtnNew.vue';
 import MenuItem from '../components/MenuItem.vue';
 import {
     VDataTable, VTextField, VBtn, VCombobox, VAutocomplete, VCard, VRadioGroup, VRadio, VCardTitle, VCardText, VIcon,
-    VCardActions, VDatePicker, VMenu, VAlert, VCheckbox, VListItem, VListItemAction, VListItemContent, VListItemTitle, VSubheader
+    VCardActions, VDatePicker, VMenu, VAlert, VCheckbox, VListItem, VListItemAction, VListItemContent, VListItemTitle, VSubheader,
+    VTextarea, VFileInput
 } from 'vuetify/lib';
 
 const importComponts = {
     VDataTable, VTextField, VBtn, VCombobox, VAutocomplete, VCard, VRadioGroup, VRadio, VCardTitle, VCardText,
     VIcon, VCardActions, VDatePicker, VMenu, VAlert, VCheckbox, VListItem, VListItemAction, VListItemContent, VListItemTitle, VSubheader,
+    VTextarea, VFileInput,
     // Custom components
     CollectionType, StaticField, BtnDelete, BtnEdit, BtnOverview, BtnShow, BtnNew, MenuItem
 };

@@ -2,7 +2,7 @@
 {# @var generate_options \K3ssen\GeneratorBundle\Generator\CrudGenerateOptions #}
 {% use '@!Generator/skeleton/controller/_index_action.php.twig' %}
 {% block index_action_return_response %}
-        return $this->render('{{ view_prefix }}/index.vue.twig', [
+        return $this->renderVue('{{ view_prefix }}/index.vue.twig', [
     {%- if generate_options.useDatatable %}
 
             'datatable' => $datatable,
