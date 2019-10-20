@@ -36,11 +36,13 @@ generator:
             default: false
         # You can add custom attributes
 
-    use_voter_default: true                 #Default answer for using Voter during crud-generation
-    ask_use_voter: true                     #use false to never be asked about using Voters during crud-generation (use_voter_default will always be used)
-    use_datatable_default: true             #Default answer for using Datatables during crud-generation
-    ask_use_datatable: true                 #use false to never be asked about using Datatables (use_datatable_default will always be used)
-    use_write_actions_default: true         #Default answer for using write actions (new, edit, delete) during crud-generation.
-    ask_use_write_actions: true             #use false to never be asked about using write actions (use_write_actions_default will always be used)
-    controller_subdirectory_default: null   #what subdirectory controllers should use by default? (null means no subdirectory)
-    ask_controller_subdirectory: true       #use false to never be asked what subdirectory a controller should use (controller_subdirectory_default will always be used)
+    use_voter_default: true                   #Default answer for using Voter during crud-generation
+    ask_use_voter: true                       #use false to never be asked about using Voters during crud-generation (use_voter_default will always be used)
+    use_datatable_default: true               #Default answer for using Datatables during crud-generation
+    ask_use_datatable: true                   #use false to never be asked about using Datatables (use_datatable_default will always be used)
+    check_sg_datatables_bundle_enabled: false #Do not check sgDatatablesBundle, since a custom implementation is being used.
+    use_write_actions_default: true           #Default answer for using write actions (new, edit, delete) during crud-generation.
+    ask_use_write_actions: true               #use false to never be asked about using write actions (use_write_actions_default will always be used)
+    controller_subdirectory_default: null     #what subdirectory controllers should use by default? (null means no subdirectory)
+    ask_controller_subdirectory: true         #use false to never be asked what subdirectory a controller should use (controller_subdirectory_default will always be used)
+    templates_file_extension: 'vue.twig'      #use vue instead of html for improved IDE completion

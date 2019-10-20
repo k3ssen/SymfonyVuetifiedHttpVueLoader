@@ -31,6 +31,3 @@ services:
 
     App\Router\Router:
         decorates: 'router'
-
-    K3ssen\GeneratorBundle\Generator\CrudGenerator: '@App\Generator\CrudGenerator'
-    K3ssen\GeneratorBundle\Command\CrudCommand: '@App\Command\CrudCommand'

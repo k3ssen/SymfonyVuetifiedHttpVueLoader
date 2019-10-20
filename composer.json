@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
@@ -31,7 +31,7 @@
         "symfony/yaml": "4.3.*"
     },
     "require-dev": {
-        "k3ssen/generator": "dev-master",
+        "k3ssen/generator": "^0.1",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
