@@ -18,7 +18,7 @@
         <v-content>
             <v-container>
                 <template v-for="(messages, type) in flashMessages">
-                    <v-alert v-for="message in messages" :type="type">{{ message }}</v-alert>
+                    <v-alert v-for="(message, index) in messages" :type="type" :key="index">{{ message }}</v-alert>
                 </template>
                 <slot></slot>
                 <slot v-if="!pageContentComponent"></slot>
