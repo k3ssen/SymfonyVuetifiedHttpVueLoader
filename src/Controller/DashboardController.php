@@ -12,6 +12,6 @@ class DashboardController extends AbstractController
      */
     public function index()
     {
-        return $this->render('dashboard/index.vue.twig');
+        return $this->renderVue('dashboard/index.vue.twig');
     }
 }
